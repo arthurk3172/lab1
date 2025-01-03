@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+</head>
+<body>
+    <img src="logo.png" alt="Logo" style="display: block; margin: 0 auto;">
+    <h1>Hello from Commit my name is Arthur</h1>
+    <button onclick="fetchData()">Fetch Data</button>
+    <div id="data"></div>
+
+    <script>
+        function fetchData() {
+            console.log('Fetching data...');
+            fetch('/api/data')
+                .then(response => {
+                    console.log('Response received:', response);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data received:', data);
+                    document.getElementById('data').innerText = JSON.stringify(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('data').innerText = 'Error fetching data';
+                });
+        }
+    </script>
+</body>
+</html>
